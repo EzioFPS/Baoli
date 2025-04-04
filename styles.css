@@ -378,12 +378,12 @@ a {
     object-position: center; /* Center the video */
     pointer-events: none;
     z-index: -3;
-    opacity: 0; /* Start hidden */
+    opacity: 1; /* Start visible */
     transition: opacity 1s ease-in-out;
     background-color: #000; /* Ensures no transparent areas */
 }
 
-/* Show video when loaded */
+/* Video is now always visible, but we keep this for backward compatibility */
 .video-loaded #video-background {
     opacity: 1;
 }

@@ -52,7 +52,7 @@
 
     <!-- Hero Section -->
     <section id="herobaoli">
-        <video id="video-background" autoplay muted loop playsinline>
+        <video id="video-background" autoplay muted loop playsinline preload="auto">
             <source src="https://res.cloudinary.com/dwm0bhkzn/video/upload/v1743760733/videoplayback_tpgnvl.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
@@ -336,7 +336,11 @@
             // Handle video background
             const videoBackground = document.getElementById('video-background');
 
-            // Add loaded class when video can play
+            // Immediately set loaded class and force play
+            document.body.classList.add('video-loaded');
+            videoBackground.play();
+
+            // Add loaded class when video can play (as a backup)
             videoBackground.addEventListener('canplay', function() {
                 document.body.classList.add('video-loaded');
             });
@@ -350,6 +354,11 @@
             document.addEventListener('click', function() {
                 videoBackground.play();
             }, { once: true });
+
+            // Also try to play the video when window gets focus
+            window.addEventListener('focus', function() {
+                videoBackground.play();
+            });
 
             // Scroll animation for the mouse wheel
             const scrollIndicator = document.querySelector('.scroll-indicator');
